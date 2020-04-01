@@ -9,7 +9,7 @@ import time
 
 print ("Starting")
 
-driver = webdriver.Firefox(executable_path='Frameworks/Users/tashinga/Desktop/Projects/PythonBot/geckodriver.exe')
+driver = webdriver.Firefox()
 
 """
 
@@ -40,4 +40,5 @@ def login(username, password):
     time.sleep(3)
 
 print("Reached the end")
+
 
