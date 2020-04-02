@@ -27,7 +27,6 @@ def login(username, password):
     username_field.send_keys(username)
     time.sleep(2)
     
-    print("Reached the middle")
 
     password_field = driver.find_element_by_xpath("/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[3]/div/label/input")
     password_field.clear()
@@ -38,6 +37,39 @@ def login(username, password):
     login = driver.find_element_by_xpath("/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div[4]")
     login.click()
     time.sleep(3)
+
+
+#explore hashtag pages and like some random pictures 
+
+def like(hashtag):
+    driver.get(f"https://www.instagram.com/explore/tags/{hashtag}/")
+    time.sleep(5)
+
+    #scroll down seven times
+    for i in range(7):
+        driver.execute_script("window.scrollTo(0,document.body.scrollHeight);")
+
+    #look for the tag name, in this case each post is under the element a
+    href_found = driver.find_elements_by_tag_name("a")
+
+    pics = [element.get_attribute('href') for element in href_found if '.com/p' in element.get_attribute('href') ]
+
+    for element in pics:
+        driver.get(element)
+        time.sleep(5)
+
+        like = driver.find_element_by_xpath("/html/body/div[1]/section/main/div/div[1]/article/div[2]/section[1]/span[1]/button")
+        
+        like.click()
+        time.sleep(5)
+
+
+
+
+
+login()
+like("foodie")
+
 
 print("Reached the end")
 
